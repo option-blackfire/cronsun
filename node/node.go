@@ -35,7 +35,7 @@ type Node struct {
 }
 
 func NewNode(cfg *conf.Conf) (n *Node, err error) {
-	ip, err := utils.LocalIP()
+	ip, err := os.Hostname()
 	if err != nil {
 		return
 	}
