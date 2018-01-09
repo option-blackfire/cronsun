@@ -12,7 +12,6 @@ import (
 	"github.com/shunfei/cronsun/conf"
 	"github.com/shunfei/cronsun/log"
 	"github.com/shunfei/cronsun/node/cron"
-	"github.com/shunfei/cronsun/utils"
 )
 
 // Node 执行 cron 命令服务的结构体
@@ -35,7 +34,7 @@ type Node struct {
 }
 
 func NewNode(cfg *conf.Conf) (n *Node, err error) {
-	ip, err := os.Hostname()
+	hostname, err := os.Hostname()
 	if err != nil {
 		return
 	}
@@ -43,7 +42,7 @@ func NewNode(cfg *conf.Conf) (n *Node, err error) {
 	n = &Node{
 		Client: cronsun.DefalutClient,
 		Node: &cronsun.Node{
-			ID:  ip.String(),
+			ID:  hostname,
 			PID: strconv.Itoa(os.Getpid()),
 		},
 		Cron: cron.New(),
